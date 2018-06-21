@@ -1,6 +1,8 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
+
+const port = process.env.PORT || 3000;
 let app = express();
 
 hbs.registerPartials(__dirname + '/views/partials')
@@ -18,13 +20,13 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((req, res, next) => {
-    res.render('maintance.hbs', {
-        title: 'Maintance Page',
-        header: 'Site is under construction',
-        para: 'This site will be up and running soon, sorry for any inconvenience.'
-    });
-});
+// app.use((req, res, next) => {
+//     res.render('maintance.hbs', {
+//         title: 'Maintance Page',
+//         header: 'Site is under construction',
+//         para: 'This site will be up and running soon, sorry for any inconvenience.'
+//     });
+// });
 
 app.use(express.static(__dirname + '/public'));
 
@@ -55,6 +57,6 @@ app.get('/bad', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000')
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}`)
 });
